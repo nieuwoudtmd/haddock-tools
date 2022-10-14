@@ -242,6 +242,9 @@ def apply_cutoff(access_data, cutoff):
         result_list.sort()
         result_str = ','.join(map(str, result_list))
         logging.info(f'Chain {chain} - {result_str}')
+    return chain, result_str
+
+
 
 
 if __name__ == "__main__":
@@ -258,4 +261,11 @@ if __name__ == "__main__":
                         datefmt='%d/%m/%Y %H:%M:%S')
 
     access_dic = get_accessibility(args.pdb_input)
-    apply_cutoff(access_dic, args.cutoff)
+    chain, result_str = apply_cutoff(access_dic, args.cutoff)
+
+
+def get_surface_residues(pdb_input):
+    access_dic = get_accessibility(pdb_input)
+    cutoff = 0.4
+    chain, result_str = apply_cutoff(access_dic, cutoff)
+    return chain, result_str
